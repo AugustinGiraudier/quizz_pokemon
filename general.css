@@ -1,0 +1,37 @@
+#gride-container{
+    display: flex;
+    justify-content: center;
+}
+.tab-img{
+    width: 27px;
+    height: 27px;
+    display: block;
+    margin: auto;
+}
+td{
+    width: 35px;
+    height: 35px;
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+tr{
+    line-height: 0px;
+    padding: 0px 0px;
+    height: 35px;
+    margin: 0px 0px;
+}
+.gride-slot{
+    background-size: 35px 35px;
+}
+.bg-0{
+    background-image: url("assets/logosTypes/factor0.png");
+}
+.bg-1{
+    background-image: url("assets/logosTypes/factor1.png");
+}
+.bg-2{
+    background-image: url("assets/logosTypes/factor2.png");
+}
+.bg-half{
+    background-image: url("assets/logosTypes/factor0.5.png");
+}

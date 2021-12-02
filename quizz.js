@@ -1,63 +1,47 @@
-let MatTypes = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5,1],              // normal
-    [1,0.5,0.5,2,1,2,1,1,1,1,1,2,0.5,1,0.5,1,2,1],          // feu
-    [1,2,0.5,0.5,1,1,1,1,2,1,1,1,2,1,0.5,1,1,1],            // eau
-    [1,0.5,2,0.5,1,1,1,0.5,2,0.5,1,0.5,2,1,0.5,1,0.5,1],    // plante
-    [1,1,2,0.5,0.5,1,1,1,0,2,1,1,1,1,0.5,1,1,1],            // electric
-    [1,0.5,0.5,2,1,0.5,1,1,2,2,1,1,1,1,2,1,0.5,1],          // glace
-    [2,1,1,1,1,2,1,0.5,1,0.5,0.5,0.5,2,0,1,2,2,0.5],        // combat
-    [1,1,1,2,1,1,1,0.5,0.5,1,1,1,0.5,0.5,1,1,0,2],          // poison
-    [1,2,1,0.5,2,1,1,2,1,0,1,0.5,2,1,1,1,2,1],              // sol
-    [1,1,1,2,0.5,1,2,1,1,1,1,2,0.5,1,1,1,0.5,1],            // vol
-    [1,1,1,1,1,1,2,2,1,1,0.5,1,1,1,1,0,0.5,1],              // psy
-    [1,0.5,1,2,1,1,0.5,0.5,1,0.5,2,1,1,0.5,1,2,0.5,0.5],    // insect
-    [1,2,1,1,1,2,0.5,1,0.5,2,1,2,1,1,1,1,0.5,1],            // roche
-    [0,1,1,1,1,1,1,1,1,1,2,1,1,2,1,0.5,1,1],                // spectre
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,0.5,0],                // dragon
-    [1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,1,0.5],            // tenebre
-    [1,0.5,0.5,1,0.5,2,1,1,1,1,1,1,2,1,1,1,0.5,2],          // acier
-    [1,0.5,1,1,1,1,2,0.5,1,1,1,1,1,1,2,2,0.5,1],            // fee
-];
-let TabTypes = ["normal","feu","eau","plante","electric","glace","combat","poison","sol","vol","psy","insect","roche","spectre","dragon","tenebre","acier","fee"];
+/*
+3 niveaux :
+    * 1 type -> trouver les supers efficace
+    * 1 type -> trouver toutes les conséquences (super, affecte pas...)
+    * 2 types -> tout trouver
+*/
 
+function DrawAnswerGride(){
 
-function TypeToIndex(type){
-    return TabTypes.findIndex(name => name === type);
-}
+    let divGride = document.querySelector("#answer-gride");
+    let divTable = document.createElement("table");
+    divGride.appendChild(divTable);
 
-function GetFactorWithName(attaquant, defenseur){
-    if(Array.isArray(defenseur)){
-        let sum = 1;
-        defenseur.forEach(elem => {
-            sum = sum * MatTypes[TypeToIndex(attaquant)][TypeToIndex(elem)];
-        });
-        return sum;
+    let nbrTypes = TabTypes.length;
+
+    let divFirstTR = document.createElement("tr");
+    divTable.appendChild(divFirstTR);
+
+    // premiere ligne avec logos
+    for(let i_type = 0; i_type < nbrTypes; i_type++){
+        let div_TD = document.createElement("td");
+        let div_img = document.createElement("img");
+        div_img.src = "./assets/logosTypes/" + TabTypes[i_type] + ".png";
+        div_img.className = "tab-img";
+        divFirstTR.appendChild(div_TD);
+        div_TD.appendChild(div_img);
     }
-    return MatTypes[TypeToIndex(attaquant)][TypeToIndex(defenseur)];
-}
 
-function GetFactorWithId(attaquantID, defenseurID){
-    if(Array.isArray(defenseurID)){
-        let sum = 1;
-        defenseurID.forEach(elem => {
-            sum = sum * MatTypes[attaquantID][elem];
+    let divSecondTR = document.createElement("tr");
+    divTable.appendChild(divSecondTR);
+    // seconde ligne avec reponses
+    for(let i_type = 0; i_type < nbrTypes; i_type++){
+        let div_TD = document.createElement("td");
+        div_TD.className = "gride-slot bg-1";
+        div_TD.addEventListener("click",event => {
+            if(div_TD.classList.contains("bg-1")){
+                div_TD.classList.remove("bg-1");
+                div_TD.classList.add("bg-2");
+            }
+            else{
+                div_TD.classList.remove("bg-2");
+                div_TD.classList.add("bg-1");
+            }
         });
-        return sum;
-    }
-    return MatTypes[attaquantID][defenseurID];
-}
-
-function FactorToString(factor){
-    switch(factor){
-        case 0:
-            return "n'affecte pas";
-        case 0.5:
-            return "pas très efficace";
-        case 1:
-            return "efficace";
-        case 2:
-            return "super efficace";
-        default:
-            return factor;
+        divSecondTR.appendChild(div_TD);
     }
 }
