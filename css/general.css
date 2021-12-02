@@ -8,6 +8,10 @@
     display: block;
     margin: auto;
 }
+.tab-img-big{
+    width: 35px;
+    height: 35px;
+}
 td{
     width: 35px;
     height: 35px;
@@ -24,14 +28,14 @@ tr{
     background-size: 35px 35px;
 }
 .bg-0{
-    background-image: url("assets/logosTypes/factor0.png");
+    background-image: url("../assets/logosTypes/factor0.png");
 }
 .bg-1{
-    background-image: url("assets/logosTypes/factor1.png");
+    background-image: url("../assets/logosTypes/factor1.png");
 }
 .bg-2{
-    background-image: url("assets/logosTypes/factor2.png");
+    background-image: url("../assets/logosTypes/factor2.png");
 }
 .bg-half{
-    background-image: url("assets/logosTypes/factor0.5.png");
+    background-image: url("../assets/logosTypes/factor0.5.png");
 }

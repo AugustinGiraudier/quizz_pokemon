@@ -21,7 +21,7 @@ function DrawAnswerGride(){
         let div_TD = document.createElement("td");
         let div_img = document.createElement("img");
         div_img.src = "./assets/logosTypes/" + TabTypes[i_type] + ".png";
-        div_img.className = "tab-img";
+        div_img.className = "tab-img tab-img-big";
         divFirstTR.appendChild(div_TD);
         div_TD.appendChild(div_img);
     }
